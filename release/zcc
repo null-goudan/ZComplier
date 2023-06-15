@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+ 
+if [ $# != 1 ];
+then
+    echo "Usage: $0 <filename>"
+    exit 1
+fi
+ 
+if ! [ -f $1 ];
+then
+    echo "Error: File $1 does NOT exists."
+    exit 1
+fi
+ 
+zccdir=$(dirname $0)
+filename=${1%.*}
+fileext=${1##*.}
+objdir=$filename-$fileext-build
+ 
+"$(dirname $0)/zcc-frontend" $1
+nasm -f elf32 -P"$zccdir/macro.inc" -P"$filename.inc" -o "$filename.o" "$filename.zco"
+ld -m elf_i386 -o "$filename" "$filename.o" -L"$zccdir" -lzio
+mkdir -p "$objdir"
+mv "$filename.zco" "$filename.inc" "$filename.o" "$filename" "$objdir/"

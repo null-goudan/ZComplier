@@ -1,0 +1,24 @@
+FUNC @zcomplier_main:
+	zcomplier_main.var a, b, c
+	push 1
+	pop a
+	push 2
+	pop b
+	push a
+	push b
+	add
+	pop c
+	push c
+	print "sum a b %d"
+	$inputaint
+	pop c
+	push c
+	print "c %d"
+ENDFUNC@zcomplier_main
+
+FUNC @inputaint:
+	print "intput"
+	push 6
+	ret ~
+ENDFUNC@inputaint
+

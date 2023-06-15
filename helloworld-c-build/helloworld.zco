@@ -1,0 +1,16 @@
+FUNC @yyxnb:
+	yyxnb.var a
+	push 0
+	pop a
+	push a
+	print "yyxnb %d"
+	$ZComplier
+	pop
+	push 0
+	ret ~
+ENDFUNC@yyxnb
+
+FUNC @ZComplier:
+	print "ZComplier"
+ENDFUNC@ZComplier
+
